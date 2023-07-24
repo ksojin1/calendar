@@ -1,0 +1,147 @@
+.App{
+    width: 1280px;
+    height: 100vh;
+    display: flex;
+    color: #333333;
+    *{box-sizing: border-box;}
+    label{cursor: pointer;}
+    h1{font-size: 24px;}
+    h2, p{font-size: 14px;}
+    input[type='text']{
+        width: 160px;
+        height: 34px; 
+        padding: 10px;
+        font-size: 14px;
+        border-radius: 5px;
+        color: #333333;
+        &:focus, &:focus-visible{
+            outline: none;
+            box-shadow: 0px 0px 0px 3px #DBE1FD;
+            border: 1px solid #3D5AFE;
+        }
+    }
+    input[type='radio'], input[type='checkbox']{
+        appearance: none;
+        cursor: pointer;
+        width: 16px;
+        height: 16px;
+        margin-right: 7px;
+        &:hover{
+            outline: none;
+            border: 1px solid lightgray;
+            background-color: rgb(241, 241, 241);
+        }
+    }
+    input[type='checkbox']{border-radius: 3px;}
+    input[type='checkbox']:checked{
+        +label::before{
+            content: "\2714"; color: white; font-size: 10px; font-weight: 900;
+            position: absolute; top: 1.5px; left: 4px; 
+        }
+        background-color: #3D5AFE;
+    }
+    input[type='radio']{ border-radius: 50%; }
+    input[type='radio']:checked{ border: 5px solid #3D5AFE; }
+    .gnb_wrap{
+        width: 256px;
+        border-right: 2px #E0E4E8;
+        background-color: rgba($color: #FFFFFF, $alpha: 0.5);
+        h2{
+            width: 256px;
+            height: 36px;
+            color: #565656;
+            margin-top: 15px;
+            padding: 0 30px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            span{font-size: 8px; color: #9BA1A7;}
+            &:hover{background-color: #F0F2F3;}
+        }
+        .ative_ul_title{
+            color: #333333;
+            span{color: #333333;} 
+        }
+        ul{
+            width: 256px;
+            height: 0px;
+            overflow: hidden;
+            transition: height 0.3s;
+            li{
+                padding-left: 45px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                height: 36px;
+                font-size: 14px;
+                color: gray;
+                &:hover{background-color: #F0F2F3;}
+            }
+            .ative_li{
+                background-color: #E0E4E8;
+                color: #333333;
+            }
+        }
+    }
+    .gnb_wrap::after{
+        content: '';
+        width: 256px;
+        height: 100%;
+        background-color: #F6F7F8;
+        position: absolute;
+        z-index: -1;
+        top: 0px;
+        left: 0px;
+    }
+    .info_wrap{
+        width: 1024px;
+        box-sizing: border-box;
+        padding: 30px 40px;
+        .info_title{margin-bottom: 30px;}
+        form{
+            border-top: 1px solid #E0E4E8;
+            border-bottom: 1px solid #E0E4E8;
+            padding-top: 15px;
+            position: relative;
+        }
+        .info_div{
+            display: grid;
+            grid-template-columns: 200px auto;
+            height: 56px;
+            align-items: center;
+            position: relative;
+            &:nth-child(6), &:nth-child(7){height: 86px;}
+            .select_div{
+                width: 238px;
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                div{position: relative;}
+                p{  
+                    color: red;
+                    font-size: 12px;
+                    margin-top: 15px;
+                }
+            }
+        }
+        input[type='submit']:hover{background-color: #003AD6;}
+        input[type='submit']{
+            position: absolute;
+            width: 74px; height: 40px;
+            border-radius: 5px;
+            border: none;
+            background-color: #024EEE;
+            color: white;
+            right: 0px;
+            bottom: -55px;
+        }
+    }
+}
+
+.date_input{
+    &::placeholder{color: #DEDEDE;}
+    &:hover{
+      &::placeholder{color: #BEBEBE;}
+      background-color: #F6F7F8;
+    }
+}
