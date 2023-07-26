@@ -139,9 +139,13 @@
 }
 
 .date_input{
+    position: absolute;
+    left: 200px;
+    z-index: 10;
     &::placeholder{color: #DEDEDE;}
     &:hover{
       &::placeholder{color: #BEBEBE;}
       background-color: #F6F7F8;
     }
+    &:focus{background-color: white;}
 }
