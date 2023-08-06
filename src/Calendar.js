@@ -1,7 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from './css/Calendar.module.scss';
+import { useDispatch, useSelector } from "react-redux";
+import { change_Info } from './redux/info';
 
-const Calendar = ({ info, setInfo, page }) => {
+const Calendar = ({ page }) => {
+
+   //전체 info
+   const info = useSelector((state) => state.info);
+   const dispatch = useDispatch();
 
   //달력에 표시할 날짜 숫자 { last: [지난달], this: [이번달], next: [다음달] }
   const [days, setDays] = useState({last: [], this: [], next: []});
@@ -57,7 +63,7 @@ const Calendar = ({ info, setInfo, page }) => {
     if(new_Month < 10) new_Month = `0${new_Month}`;
     if(new_day < 10) new_day = `0${new_day}`;
     new_Info[page].date = `${selectInfo.year}.${new_Month}.${new_day}`;
-    setInfo(new_Info);
+    dispatch(change_Info(new_Info));
   }
 
   //지난달 달력으로 이동
@@ -182,7 +188,7 @@ const Calendar = ({ info, setInfo, page }) => {
         </div>
         <div className={styles.days_div}>
 
-          {days.last.map(day => {return <div onClick={() => setSelectInfo({...selectInfo, month: selectInfo.month-1})} key={day} className={styles.last_days}>{day}</div>})}
+          {days.last.map(day => {return <div onClick={moveLastMonthFnc} key={day} className={styles.last_days}>{day}</div>})}
 
           {days.this.map(day => {
             let today = false; //today 체크
@@ -200,7 +206,7 @@ const Calendar = ({ info, setInfo, page }) => {
               style={today ? {fontWeight: 'bold'} : {fontWeight: 'normal'}}>{day}</div>
           })}
 
-          {days.next.map(day => {return <div onClick={() => setSelectInfo({...selectInfo, month: selectInfo.month+1})} key={day} className={styles.next_days}>{day}</div>})}
+          {days.next.map(day => {return <div onClick={moveNextMonthFnc} key={day} className={styles.next_days}>{day}</div>})}
 
         </div>
       </div>

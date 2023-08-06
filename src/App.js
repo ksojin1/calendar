@@ -3,46 +3,14 @@ import axios from "axios";
 import Calendar from './Calendar';
 import "./css/App.scss";
 
-const initialInfo = [
-  {//첫번째 페이지
-    info1: "",
-    info2: "",
-    info3: "",
-    info4: "",
-    date: "",
-    info5: "",
-    info6: []
-  },{//두번째 페이지
-    info1: "",
-    info2: "",
-    info3: "",
-    info4: "",
-    date: "",
-    info5: "",
-    info6: []
-  },{//세번째 페이지
-    info1: "",
-    info2: "",
-    info3: "",
-    info4: "",
-    date: "",
-    info5: "",
-    info6: []
-  },{//네번째 페이지
-    info1: "",
-    info2: "",
-    info3: "",
-    info4: "",
-    date: "",
-    info5: "",
-    info6: []
-  }
-];
+import { useSelector, useDispatch } from 'react-redux';
+import { change_Info } from './redux/info';
 
 function App() {
 
-  //POST로 보낼 정보
-  const [info, setInfo] = useState(initialInfo);
+  //전체 info
+  const info = useSelector((state) => state.info);
+  const dispatch = useDispatch();
 
   //현재 페이지
   const [page, setPage] = useState(0);
@@ -59,13 +27,14 @@ function App() {
     const info_Type = e.target.name;
     if(e.target.type === 'checkbox'){
       if(e.target.checked)
-        new_Info[page].info6.push(e.target.value);
+        new_Info[page] = {...new_Info[page], info6 : [...new_Info[page].info6, e.target.value]};
       else
-        new_Info[page].info6 = new_Info[page].info6.filter(val => val !== e.target.value);
+        new_Info[page] = {...new_Info[page], info6 : new_Info[page].info6.filter(val => val !== e.target.value)};
     }else 
       new_Info[page] = {...new_Info[page], [info_Type] : e.target.value};
     
-    setInfo(new_Info);
+    //state 변경
+    dispatch(change_Info(new_Info));
   };
 
   //저장 버튼 클릭 시
@@ -88,16 +57,9 @@ function App() {
       const res = await axios.get('https://api-jobtest.json2bot.chat/test');
       if(res.data.ok){
         const result = res.data.data;
-        setInfo(info.map((prev) => {
-          prev.date = result.date.replaceAll('-', '.');
-          prev.info1 = result.info1;
-          prev.info2 = result.info2;
-          prev.info3 = result.info3;
-          prev.info4 = result.info4;
-          prev.info5 = result.info5;
-          prev.info6 = result.info6;
-          return prev;
-        }));
+        result.date = result.date.replaceAll('-', '.');
+        let new_Info = [result, result, result, result];
+        dispatch(change_Info(new_Info));
       }
     } catch (error) {
       alert(error);
@@ -151,7 +113,7 @@ function App() {
               onFocus={() => setCal(true)}/>
             {cal && (
               <>
-              <Calendar info={info} setInfo={setInfo} page={page}/>
+              <Calendar page={page}/>
               {/* 날짜 input, Calendar 외부 영역 클릭 시 달력 비활성화 */}
               <div onClick={() => setCal(false)} style={{width: '100%', height: '100%', position: 'fixed', zIndex: '9', top: '0px', left: '0px'}}></div>
               </>

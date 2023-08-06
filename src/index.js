@@ -3,7 +3,16 @@ import ReactDOM from 'react-dom/client';
 import './css/reset.css';
 import App from './App';
 
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import rootReducer from './redux/index';
+
+//스토어 생성
+const store = createStore(rootReducer);
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <App />
+  <Provider store={store}>
+    <App />
+  </Provider>
 );
