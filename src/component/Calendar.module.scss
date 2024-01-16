@@ -1,0 +1,134 @@
+.container{ 
+  margin-top: 5px;
+  width: 350px;
+  height: 400px;
+  position: absolute;
+  font-size: 16px;
+  color: #333333;
+  background-color: white;
+  padding: 15px 20px;
+  display: grid;
+  grid-template-rows: 15% 10% 75%;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px 4px #F0F2F3;
+  & > div:not(.nav_wrap) {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+// 네비영역
+.nav_wrap {
+  display: grid;
+  grid-template-columns: 1fr 30% 25% 1fr;
+  gap: 7px;
+  align-items: center;
+  .arrow_left_btn, .arrow_right_btn {
+    display: flex;
+    align-items: center;
+    > span { 
+      color: #BDBEBD;
+      border-radius: 2px; 
+      font-size: 32px;
+      cursor: pointer;
+      &:hover {
+        color: #333333;
+      }
+    }
+  }
+  .arrow_right_btn {
+    justify-content: end;
+  }
+  .select_wrap {
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+    .selected_value {
+      border: 1px solid #DEDEDE;
+      border-radius: 5px;
+      display: grid;
+      grid-template-columns: 1fr 26px;
+      align-items: center;
+      > p {
+        padding: 5px 10px;
+        margin: 0px;
+      }
+      > span {
+        font-size: 20px;
+        color: #BDBEBD;
+      }
+      &:hover {
+        border: 1px solid #BEBEBE;
+        background-color: #F0F2F3;
+        > span {
+          color: #333333;
+        }
+      }
+    }
+    #select_filled {
+      outline: none;
+      box-shadow: 0px 0px 3px 2px #DBE1FD;
+      border: 1px solid #3D5AFE;
+      background-color: white;
+    }
+  }
+  .option_list{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    cursor: pointer;
+    width: 100%;
+    height: 200px;
+    overflow-y: scroll;
+    position: absolute;
+    top: 40px;
+    left: 0px;
+    background-color: white;
+    box-shadow: 0px 2px 5px 2px #DEDEDE;
+    border-radius: 5px;
+    li{width: 100%; padding: 5px 10px;}
+    &::-webkit-scrollbar {display: none;}
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    .option_list{
+      background-color: #F1F1F0;
+    }
+    .selected_option{
+      background-color: #F1F1F0;
+    }
+    .option:hover{
+        background-color: #F0F2F3;
+    }
+  }
+}
+
+// 요일
+.week_wrap {
+  color: #9C9C9C;
+}
+
+// 날짜
+.days_wrap {
+  > span {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25px;
+  }
+  .last_days, .next_days {
+    color: #BEBEBE;
+  }
+  .selected_day {
+    background-color: #024EEE;
+    color: white;
+  }
+  .this_days:hover {
+    background-color: #DBE1FD;
+  }
+}
